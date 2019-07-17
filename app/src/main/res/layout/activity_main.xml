@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="100"
             android:textStyle="bold"
-            android:text="Convert From:" />
+            android:text="@string/convert_from" />
 
     </LinearLayout>
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="100"
             android:textStyle="bold"
-            android:text="Convert  To:" />
+            android:text="@string/convert_to" />
 
     </LinearLayout>
 
@@ -92,12 +92,11 @@
         android:textStyle="bold"/>
 
     <Button
-        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="#FFDD2D"
-        android:text="Convert"
+        android:text="@string/convert"
         android:textColor="#3E4757"
         android:visibility="invisible"/>
 

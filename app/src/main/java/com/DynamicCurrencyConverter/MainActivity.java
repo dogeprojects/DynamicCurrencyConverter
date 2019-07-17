@@ -16,18 +16,20 @@ import static java.lang.Float.valueOf;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    Spinner spinnerFrom, spinnerTo;
-    ArrayAdapter<String> currencyFromArray, currencyToArray;
+    private Spinner spinnerFrom;
+    private Spinner spinnerTo;
+    private ArrayAdapter<String> currencyFromArray;
+    private ArrayAdapter<String> currencyToArray;
     //Button button;
-    float coefTo = 1f;
-    float contentFromEditText;
+    private float coefTo = 1f;
+    private float contentFromEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final EditText editText = (EditText) findViewById(R.id.editText);
+        final EditText editText = findViewById(R.id.editText);
         //editText.setOnClickListener(this);
 
         editText.addTextChangedListener(new OwnWatcher());
@@ -35,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         //button = (Button) findViewById(R.id.button);
         //implementing OnClickListener (need to override the method)
 
-        spinnerFrom = (Spinner) findViewById(R.id.spinnerFrom);
+        spinnerFrom = findViewById(R.id.spinnerFrom);
         //implementing OnItemSelectedListener (need to override the method)
         spinnerFrom.setOnItemSelectedListener(this);
 
-        currencyFromArray = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        currencyFromArray = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         currencyFromArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerFrom.setAdapter(currencyFromArray);
@@ -52,11 +54,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         spinnerFrom.setSelection(0);
 
-        spinnerTo = (Spinner) findViewById(R.id.spinnerTo);
+        spinnerTo = findViewById(R.id.spinnerTo);
         //implementing OnItemSelectedListener (need to override the method)
         spinnerTo.setOnItemSelectedListener(this);
 
-        currencyToArray = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item);
+        currencyToArray = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         currencyToArray.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerTo.setAdapter(currencyToArray);
@@ -78,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onTextChanged(CharSequence s, int start,
                                       int before, int count) {
-                TextView resultView = (TextView) findViewById(R.id.resultView);
+                TextView resultView = findViewById(R.id.resultView);
 
                 if (editText.getText().toString().isEmpty()
                         || editText.getText().toString().equals(".")) {
@@ -91,38 +93,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 String toSpinnerPosition = spinnerTo.getSelectedItem().toString();
                 switch (fromSpinnerPosition){
                     case "RUB":
-                        if (toSpinnerPosition == "USD") {
+                        if (toSpinnerPosition.equals("USD")) {
                             coefTo = 0.015f;
-                        } else if (toSpinnerPosition == "EUR") {
+                        } else if (toSpinnerPosition.equals("EUR")) {
                             coefTo = 0.015f;
-                        } else if (toSpinnerPosition == "JPY") {
+                        } else if (toSpinnerPosition.equals("JPY")) {
                             coefTo = 1.66f;
                         }
                         break;
                     case "USD":
-                        if (toSpinnerPosition == "RUB") {
+                        if (toSpinnerPosition.equals("RUB")) {
                             coefTo = 65.92f;
-                        } else if (toSpinnerPosition == "EUR") {
+                        } else if (toSpinnerPosition.equals("EUR")) {
                             coefTo = 0.87f;
-                        } else if (toSpinnerPosition == "JPY") {
+                        } else if (toSpinnerPosition.equals("JPY")) {
                             coefTo = 109.43f;
                         }
                         break;
                     case "EUR":
-                        if (toSpinnerPosition == "RUB") {
+                        if (toSpinnerPosition.equals("RUB")) {
                             coefTo = 75.39f;
-                        } else if (toSpinnerPosition == "USD") {
+                        } else if (toSpinnerPosition.equals("USD")) {
                             coefTo = 1.14f;
-                        } else if (toSpinnerPosition == "JPY") {
+                        } else if (toSpinnerPosition.equals("JPY")) {
                             coefTo = 125.18f;
                         }
                         break;
                     case "JPY":
-                        if (toSpinnerPosition == "RUB") {
+                        if (toSpinnerPosition.equals("RUB")) {
                             coefTo = 0.60f;
-                        } else if (toSpinnerPosition == "USD") {
+                        } else if (toSpinnerPosition.equals("USD")) {
                             coefTo = 0.0091f;
-                        } else if (toSpinnerPosition == "EUR") {
+                        } else if (toSpinnerPosition.equals("EUR")) {
                             coefTo = 0.008f;
                         }
                         break;
@@ -192,12 +194,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    public class TextChangedWatcher {
-
-    }
-
     //The division level
-    public class OwnWatcher implements TextWatcher {
+    class OwnWatcher implements TextWatcher {
 
         private static final char space = ' ';
 
